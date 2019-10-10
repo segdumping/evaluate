@@ -15,7 +15,7 @@ func TestEvaluate(t *testing.T) {
 	evaluateTests := []EvaluateTest{
 		{
 			Express: "!true",
-			Expect:  true,
+			Expect:  false,
 		},
 
 		{
@@ -25,12 +25,12 @@ func TestEvaluate(t *testing.T) {
 
 		{
 			Express: "-1 < -5",
-			Expect:  true,
+			Expect:  false,
 		},
 
 		{
 			Express: "1.1 < 1.1",
-			Expect:  true,
+			Expect:  false,
 		},
 
 		{
@@ -40,7 +40,7 @@ func TestEvaluate(t *testing.T) {
 
 		{
 			Express: "1.1 != 1.1",
-			Expect:  true,
+			Expect:  false,
 		},
 
 		{
@@ -52,7 +52,7 @@ func TestEvaluate(t *testing.T) {
 		{
 			Express:    "age > 5",
 			Parameters: MapParameters{"age": 4},
-			Expect:     true,
+			Expect:     false,
 		},
 
 		{
@@ -64,7 +64,7 @@ func TestEvaluate(t *testing.T) {
 		{
 			Express:    "age < 5",
 			Parameters: MapParameters{"age": 5},
-			Expect:     true,
+			Expect:     false,
 		},
 
 		{
@@ -88,7 +88,7 @@ func TestEvaluate(t *testing.T) {
 		{
 			Express:    "name != 'liyi'",
 			Parameters: MapParameters{"name": "liyi"},
-			Expect:     true,
+			Expect:     false,
 		},
 
 		{
@@ -100,7 +100,7 @@ func TestEvaluate(t *testing.T) {
 		{
 			Express:    "age > 5 || age == 3",
 			Parameters: MapParameters{"age": 2},
-			Expect:     true,
+			Expect:     false,
 		},
 
 		{
