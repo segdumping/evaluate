@@ -2,7 +2,6 @@ package evaluate
 
 import (
 	"container/list"
-	"fmt"
 )
 
 type stream struct {
@@ -32,7 +31,6 @@ func (s *stream) fromString(source string) {
 
 func (s *stream) fromList(l *list.List) {
 	for e := l.Front(); e != nil; e = e.Next() {
-		fmt.Println(e.Value)
 		s.source = append(s.source, e.Value)
 	}
 }
