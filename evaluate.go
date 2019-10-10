@@ -1,7 +1,7 @@
 package evaluate
 
 import (
-	"github.com/pkg/errors"
+	"errors"
 	"reflect"
 	"unicode"
 )
