@@ -5,6 +5,7 @@ type Operator int
 const (
 	ILLEGAL Operator = iota
 	NEG              // -
+	NOT              // !
 	LAND             // &&
 	LOR              // ||
 	EQL              // ==
@@ -41,6 +42,9 @@ var operators = map[string]Operator{
 	"==": EQL,
 	"&&": LAND,
 	"||": LOR,
+	"!":  NOT,
+	"(":  LPAREN,
+	")":  RPAREN,
 }
 
 //忽略字符
@@ -57,7 +61,7 @@ var puncts = map[rune]bool{
 //运算符优先级，数字越小优先级越高
 func (o Operator) Precedence() int {
 	switch o {
-	case NEG:
+	case NEG, NOT:
 		return 1
 	case GTR, LSS, GEQ, LEQ, NEQ, EQL:
 		return 3
@@ -93,7 +97,7 @@ func IsPunct(character rune) bool {
 //一元运算符
 func IsUnary(word string) bool {
 	switch word {
-	case "-":
+	case "-", "!":
 		return true
 	}
 

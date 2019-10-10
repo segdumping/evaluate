@@ -16,6 +16,7 @@ var cmpHandlers = map[Operator]func(left, right interface{}) (interface{}, error
 	EQL:  eql,
 	LAND: land,
 	LOR:  lor,
+	NOT:  not,
 }
 
 func compare(op Operator, left, right interface{}) (interface{}, error) {
@@ -81,6 +82,14 @@ func land(left, right interface{}) (interface{}, error) {
 
 func lor(left, right interface{}) (interface{}, error) {
 	return left.(bool) || right.(bool), nil
+}
+
+func not(left, right interface{}) (interface{}, error) {
+	if v, ok := right.(bool); ok {
+		return !v, nil
+	} else {
+		return nil, errors.New(fmt.Sprintf("op (!) invalid param: %v", right))
+	}
 }
 
 func isFloat64(value interface{}) bool {

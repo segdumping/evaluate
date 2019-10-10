@@ -49,7 +49,7 @@ func readNormal(stream *stream) string {
 	return buf.String()
 }
 
-//运算符
+//运算符，最多匹配原则
 func readOperate(stream *stream) string {
 	var buf bytes.Buffer
 	for stream.CanRead() {
@@ -70,19 +70,17 @@ func readOperate(stream *stream) string {
 	if IsOperator(word) {
 		return word
 	} else {
-		return findValidOperator(buf)
-	}
-}
+		stream.Rewind(1)
+		for i := buf.Len() - 1; i > 0; i-- {
+			buf.Truncate(i)
+			word := buf.String()
+			if IsOperator(word) {
+				return word
+			}
 
-//查找合法的运算符，eg: (-
-func findValidOperator(buf bytes.Buffer) string {
-	for i := buf.Len() - 1; i > 0; i-- {
-		buf.Truncate(i)
-		word := buf.String()
-		if IsOperator(word) {
-			return word
+			stream.Rewind(1)
 		}
 	}
 
-	return buf.String()
+	return word
 }

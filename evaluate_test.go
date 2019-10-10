@@ -14,6 +14,11 @@ type EvaluateTest struct {
 func TestEvaluate(t *testing.T) {
 	evaluateTests := []EvaluateTest{
 		{
+			Express: "!true",
+			Expect:  true,
+		},
+
+		{
 			Express: "10 > 5",
 			Expect:  true,
 		},
@@ -94,6 +99,12 @@ func TestEvaluate(t *testing.T) {
 
 		{
 			Express:    "age > 5 || age == 3",
+			Parameters: MapParameters{"age": 2},
+			Expect:     true,
+		},
+
+		{
+			Express:    "!(age > 5 || age == 3)",
 			Parameters: MapParameters{"age": 2},
 			Expect:     true,
 		},
