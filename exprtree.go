@@ -63,16 +63,16 @@ func PostfixToBinaryTree(element *list.Element) (*ExpressToken, error) {
 }
 
 //中缀转后缀
-func infixToPostfix(stream *stream, endIdentifier string) *list.List {
+func infixToPostfix(stream *stream) *list.List {
 	l := list.New()
 	stacks := make([]stack.Stack, 6)
 
 	for stream.CanRead() {
 		element := stream.Read().(string)
-		if element == endIdentifier { //结束标识符
+		if element == ")" {
 			break
 		} else if element == "(" { //括号中的表达式递归处理
-			l.PushBackList(infixToPostfix(stream, ")"))
+			l.PushBackList(infixToPostfix(stream))
 		} else {
 			if ident, ok := OpIdentifier(element); !ok { //普通字符串
 				l.PushBack(element)

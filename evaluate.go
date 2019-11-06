@@ -17,7 +17,7 @@ func NewEvaluableExpression(express string) (*EvaluableExpression, error) {
 	}
 
 	words := ExpressLexer(express)
-	infix := infixToPostfix(words, "")
+	infix := infixToPostfix(words)
 	tree, err := PostfixToBinaryTree(infix.Front())
 
 	if err != nil {

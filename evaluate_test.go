@@ -124,7 +124,7 @@ func TestEvaluate(t *testing.T) {
 		}
 
 		r, err := eval.Evaluate(v.Parameters)
-		t.Logf("result: %v, expect: %v, error: %v, express: %s, paramers: %v", r, v.Expect, err, v.Express, v.Parameters)
+		t.Logf("result: %t, expect: %t, error: %s, express: %s, paramers: %v", r, v.Expect, err.Error(), v.Express, v.Parameters)
 	}
 }
 
